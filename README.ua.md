@@ -149,9 +149,9 @@ import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 ```
 
-Переглянь демо-відео роботи застосунку на цьому етапі.
-
-[🎥 Video](https://www.youtube.com/watch?v=4tGWr0Q7HV0&embeds_referring_euri=https%3A%2F%2Fwww.edu.goit.global%2F&embeds_referring_origin=https%3A%2F%2Fwww.edu.goit.global&source_ve_path=OTY3MTQ)
+Переглянь
+[демо-відео роботи застосунку](https://www.youtube.com/watch?v=4tGWr0Q7HV0&embeds_referring_euri=https%3A%2F%2Fwww.edu.goit.global%2F&embeds_referring_origin=https%3A%2F%2Fwww.edu.goit.global&source_ve_path=OTY3MTQ)
+на цьому етапі.
 
 ## Галерея і картки зображень
 

@@ -1,113 +1,272 @@
-# Vanilla App Template
+# Homework №11
 
-Цей проект було створено за допомогою Vite. Для знайомства та налаштування
-додаткових можливостей [звернись до документації](https://vitejs.dev/).
+1. Create a repository **`goit-js-hw-11`**.
+2. Build the project using [**Vite**](https://vite.dev/). We prepared a
+   [ready-made template](https://github.com/goitacademy/vanilla-app-template)
+   with all the additional project settings and recommend using it.
+3. Use [**Axios**](https://axios-http.com/) for HTTP requests.
+4. Read the task and implement it in your code editor.
+5. Make sure the code is formatted with **Prettier**, and there are no errors or
+   warnings in the console when opening the live page.
+6. Submit the homework for review.
 
-## Створення репозиторію за шаблоном
+**Submission format:** The homework should contain two links: to the source
+files and to the live page on **GitHub Pages**.
 
-Використовуй цей репозиторій організації GoIT як шаблон для створення
-репозиторію свого проекту. Для цього натисни на кнопку `«Use this template»` і
-обери опцію `«Create a new repository»`, як показано на зображенні.
+![Project preview](assets/goit-11.jpg)
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+---
 
-На наступному етапі відкриється сторінка створення нового репозиторію. Заповни
-поле його імені, переконайся, що репозиторій публічний, після чого натисни
-кнопку `«Create repository from template»`.
+## Project structure and code organization
 
-![Creating repo from a template step 2](./assets/template-step-2.png)
+- File and folder names, as well as their structure, must match the given
+  scheme. Otherwise, the work will not be accepted.
+- Use **modularity** and the `export/import` syntax.
 
-Після того, як репозиторій буде створено, необхідно перейти в налаштування
-створеного репозиторію на вкладку `Settings` > `Actions` > `General` як показано
-на зображенні.
+### `pixabay-api.js`
 
-![Settings GitHub Actions permissions step 1](./assets/gh-actions-perm-1.png)
+Store functions for making HTTP requests here:
 
-Проскроливши сторінку до самого кінця, в секції `«Workflow permissions»` обери
-опцію `«Read and write permissions»` і постав галочку в чекбоксі. Це необхідно
-для автоматизації процесу деплою проекту.
+- **getImagesByQuery(query)**
+  - Accepts one parameter `query` (search term as a string).
+  - Makes an HTTP request and returns the value of the `data` property from the
+    response.
 
-![Settings GitHub Actions permissions step 2](./assets/gh-actions-perm-2.png)
+### `render-functions.js`
 
-Тепер у тебе є особистий репозиторій проекту, зі структурою файлів та папок
-репозиторію-шаблону. Далі працюй з ним, як з будь-яким іншим особистим
-репозиторієм, клонуй його собі на комп'ютер, пиши код, роби коміти та відправляй
-їх на GitHub.
+Here:
 
-## Підготовка до роботи
+- Create an instance of **SimpleLightbox** for the modal window.
+- Store functions for updating UI elements:
+  - **createGallery(images)** – accepts an array of `images`, creates HTML
+    markup for the gallery, adds it to the container, and calls the `refresh()`
+    method of the **SimpleLightbox** instance. Returns `void`.
+  - **clearGallery()** – clears the gallery container. Returns `void`.
+  - **showLoader()** – adds a class to display the loader. Returns `void`.
+  - **hideLoader()** – removes the loader class. Returns `void`.
 
-1. Переконайся, що на комп'ютері встановлено LTS-версію Node.js.
-   [Скачай та встанови](https://nodejs.org/en/) її якщо необхідно.
-2. Встанови базові залежності проекту в терміналі командою `npm install`.
-3. Запусти режим розробки, виконавши в терміналі команду `npm run dev`.
-4. Перейдіть у браузері за адресою
-   [http://localhost:5173](http://localhost:5173). Ця сторінка буде автоматично
-   перезавантажуватись після збереження змін у файли проекту.
+### `main.js`
 
-## Файли і папки
+- Contains the entire application logic.
+- Calls **iziToast** and performs array length checks from the API response
+  here.
+- Import functions from `pixabay-api.js` and `render-functions.js` and call them
+  at the appropriate moment.
 
-- Файли розмітки компонентів сторінки повинні лежати в папці `src/partials` та
-  імпортуватись до файлу `index.html`. Наприклад, файл з розміткою хедера
-  `header.html` створюємо у папці `partials` та імпортуємо в `index.html`.
-- Файли стилів повинні лежати в папці `src/css` та імпортуватись до HTML-файлів
-  сторінок. Наприклад, для `index.html` файл стилів називається `index.css`.
-- Зображення додавай до папки `src/img`. Збирач оптимізує їх, але тільки при
-  деплої продакшн версії проекту. Все це відбувається у хмарі, щоб не
-  навантажувати твій комп'ютер, тому що на слабких компʼютерах це може зайняти
-  багато часу.
+## 🎥 Demo video
 
-## Деплой
+https://github.com/user-attachments/assets/a0e035cf-3707-481f-af58-d96f51551eed
 
-Продакшн версія проекту буде автоматично збиратися та деплоїтись на GitHub
-Pages, у гілку `gh-pages`, щоразу, коли оновлюється гілка `main`. Наприклад,
-після прямого пуша або прийнятого пул-реквесту. Для цього необхідно у файлі
-`package.json` змінити значення прапора `--base=/<REPO>/`, для команди `build`,
-замінивши `<REPO>` на назву свого репозиторію, та відправити зміни на GitHub.
+---
 
-```json
-"build": "vite build --base=/<REPO>/",
+## Task — Image Search
+
+Create an application to search for images by keyword and display them in a
+gallery. Style the UI elements according to the
+[design mockup](https://www.figma.com/file/m8k9NQV7qZrtYDCvxfD68B/%D0%94%D0%97-JavaScript?type=design&node-id=3-1009&mode=design&t=eCh8cUwdfWOakuAr-0).
+
+---
+
+### Search Form
+
+Add the following HTML markup for the form. The form consists of an input field
+for the search term and a **submit** button.
+
+```html
+<form class="form">
+  <label>
+    <input
+      type="text"
+      name="search-text"
+      placeholder="Search images..."
+      required
+    />
+  </label>
+  <button type="submit">Search</button>
+</form>
 ```
 
-Далі необхідно зайти в налаштування GitHub-репозиторію (`Settings` > `Pages`) та
-виставити роздачу продакшн версії файлів з папки `/root` гілки `gh-pages`, якщо
-це не було зроблено автоматично.
+## Image Search by Keyword
 
-![GitHub Pages settings](./assets/repo-settings.png)
+The user will enter a search string into the text input, and after submitting
+the form, an HTTP request should be made using that search string.
 
-### Статус деплою
+### Form Validation
 
-Статус деплою крайнього коміту відображається іконкою біля його ідентифікатора.
+When the form submit button is clicked, check that the input field is not empty,
+so the user cannot send a request if the search field is empty.
 
-- **Жовтий колір** - виконується збірка та деплой проекту.
-- **Зелений колір** - деплой завершився успішно.
-- **Червоний колір** - під час лінтингу, збірки чи деплою сталася помилка.
+### HTTP Requests
 
-Більш детальну інформацію про статус можна переглянути натиснувши на іконку, і в
-вікні, що випадає, перейти за посиланням `Details`.
+- Add the [**Axios**](https://axios-http.com/) library to the project for making
+  HTTP requests.
+- Use the public API service [**Pixabay**](https://pixabay.com/api/docs/) as the
+  backend. Register, get your unique API key, and read the
+  [documentation](https://pixabay.com/api/docs/#api_search_images).
 
-![Deployment status](./assets/deploy-status.png)
+#### Required query parameters:
 
-### Жива сторінка
+| Parameter     | Value / Description                     |
+| ------------- | --------------------------------------- |
+| `key`         | Your unique API access key              |
+| `q`           | The search term entered by the user     |
+| `image_type`  | Image type, must be `photo`             |
+| `orientation` | Photo orientation, must be `horizontal` |
+| `safesearch`  | Age filter, must be `true`              |
 
-Через якийсь час, зазвичай кілька хвилин, живу сторінку можна буде подивитися за
-адресою, вказаною на вкладці `Settings` > `Pages` в налаштуваннях репозиторію.
-Наприклад, ось посилання на живу версію для цього репозиторію
+The response will be an object with several properties, among which `hits` is an
+array of objects containing images that match the search criteria.
 
-[https://goitacademy.github.io/vanilla-app-template/](https://goitacademy.github.io/vanilla-app-template/).
+---
 
-Якщо відкриється порожня сторінка, переконайся, що у вкладці `Console` немає
-помилок пов'язаних з неправильними шляхами до CSS та JS файлів проекту
-(**404**). Швидше за все у тебе неправильне значення прапора `--base` для
-команди `build` у файлі `package.json`.
+### Modular Approach
 
-## Як це працює
+Be sure to place functions for HTTP requests in a separate file
+**`pixabay-api.js`** in the `js` folder. This is good practice and helps
+maintain a modular approach in development.
 
-![How it works](./assets/how-it-works.png)
+---
 
-1. Після кожного пуша у гілку `main` GitHub-репозиторію, запускається
-   спеціальний скрипт (GitHub Action) із файлу `.github/workflows/deploy.yml`.
-2. Усі файли репозиторію копіюються на сервер, де проект ініціалізується та
-   проходить лінтинг та збірку перед деплоєм.
-3. Якщо всі кроки пройшли успішно, зібрана продакшн версія файлів проекту
-   відправляється у гілку `gh-pages`. В іншому випадку, у лозі виконання скрипта
-   буде вказано в чому проблема.
+### Handling Empty Results
+
+If the backend returns an empty array, it means no suitable results were found.
+In this case, display a message to the user:
+
+`Sorry, there are no images matching your search query. Please try again!`
+
+Use the [**iziToast**](https://github.com/marcelodolza/iziToast) library to show
+notifications. To include the library's CSS in the project, add an additional
+import besides what is described in the documentation:
+
+```js
+// Import as described in the documentation
+import iziToast from 'izitoast';
+// Additional import for styles
+import 'izitoast/dist/css/iziToast.min.css';
+```
+
+Check out the
+[demo video of the app](https://www.youtube.com/watch?v=4tGWr0Q7HV0&embeds_referring_euri=https%3A%2F%2Fwww.edu.goit.global%2F&embeds_referring_origin=https%3A%2F%2Fwww.edu.goit.global&source_ve_path=OTY3MTQ)
+at this stage.
+
+## Gallery and Image Cards
+
+The gallery element (`<ul class="gallery">`) should already be present in the
+HTML document. After making HTTP requests, you need to add markup for the image
+cards to it.
+
+### Image Object Structure
+
+Each image is represented by an object, from which only the following properties
+are used:
+
+| Property        | Description                                                   |
+| --------------- | ------------------------------------------------------------- |
+| `webformatURL`  | URL of the small image for the gallery card                   |
+| `largeImageURL` | URL of the large image for the modal window                   |
+| `tags`          | String describing the image, suitable for the `alt` attribute |
+| `likes`         | Number of likes                                               |
+| `views`         | Number of views                                               |
+| `comments`      | Number of comments                                            |
+| `downloads`     | Number of downloads                                           |
+
+---
+
+### Clearing the Gallery
+
+Before searching with a new keyword, the gallery content must be fully cleared
+to avoid mixing results from previous queries.
+
+---
+
+### Demo Video
+
+Check out the
+[demo video of the app](https://www.youtube.com/watch?v=n-crt20j5I8&embeds_referring_euri=https%3A%2F%2Fwww.edu.goit.global%2F&embeds_referring_origin=https%3A%2F%2Fwww.edu.goit.global&source_ve_path=OTY3MTQ)
+at this stage.
+
+## SimpleLightbox Library
+
+Add the ability to view large versions of images using the
+[**SimpleLightbox**](https://github.com/andreknieriem/simplelightbox) library
+for a full-featured gallery.
+
+### Library Setup
+
+To include the library’s CSS in the project, add an additional import besides
+what is described in the documentation:
+
+```js
+// Import as described in the documentation
+import SimpleLightbox from 'simplelightbox';
+// Additional import for styles
+import 'simplelightbox/dist/simple-lightbox.min.css';
+```
+
+In the markup, each image card should be wrapped in a link, as described in the
+**Markup** section of the documentation. The library has a `refresh()` method,
+which must be called every time new elements are added to the gallery.
+
+The modal window functionality is tied to the gallery itself, so using
+**SimpleLightbox** and its `refresh()` method is appropriate in the
+`render-functions.js` file.
+
+Check out the
+[demo video of the app](https://www.youtube.com/watch?v=DVKNqtbZVGc&embeds_referring_euri=https%3A%2F%2Fwww.edu.goit.global%2F&embeds_referring_origin=https%3A%2F%2Fwww.edu.goit.global&source_ve_path=OTY3MTQ)
+at this stage.
+
+## Loading Indicator
+
+Add an element to notify the user about the image loading process from the
+backend. The loader should appear before the HTTP request starts and disappear
+after it completes.
+
+Check out the
+[demo video of the app](https://www.youtube.com/watch?v=o981M1AqZ1s) at this
+stage.
+
+## Loading Indicator and Verification
+
+Instead of plain text, as shown in the demo video, use a library with visually
+appealing loading indicators:
+[**css-loader**](https://github.com/vineethtrv/css-loader). A video tutorial on
+using this library is available in the
+[README.md](https://github.com/vineethtrv/css-loader/blob/master/README.md) of
+their repository.
+
+### Mentor Review Checklist
+
+- The homework contains two links: to the source files and the live page on
+  **GitHub Pages**.
+- The project is built using [**Vite**](https://vite.dev/).
+- The browser console has no errors, warnings, or console logs.
+- The project includes the libraries
+  [iziToast](https://github.com/marcelodolza/iziToast),
+  [**SimpleLightbox**](https://github.com/andreknieriem/simplelightbox), and
+  [**css-loader**](https://github.com/vineethtrv/css-loader).
+- Page elements are styled according to the design layout (or custom styles).
+- `pixabay-api.js` contains the `getImagesByQuery(query)` function for HTTP
+  requests.
+- `render-functions.js` contains a **SimpleLightbox** instance and functions for
+  UI rendering: `createGallery(images)`, `clearGallery()`, `showLoader()`,
+  `hideLoader()`.
+- `main.js` contains all the app logic.
+- The page includes a search form for images by keyword.
+- On form submission, the **css-loader** loading indicator appears before the
+  backend request, and previous search results are cleared.
+- The form submission sends a request to the backend for images using the
+  keyword and all required parameters.
+- After receiving a response, the loader disappears, and images are rendered on
+  the page based on the backend data, or a message is shown if no results were
+  found.
+- New images are added to the DOM in a single operation.
+- After adding new images to the gallery, the **SimpleLightbox** instance calls
+  the `refresh()` method.
+- Clicking on a small image in the gallery opens its large version in a modal
+  using **SimpleLightbox**.
+- HTTP requests use `then()` and `catch()` handlers to manage errors and prevent
+  the page from breaking.
+
+---
+
+**Live page: [GitHub Pages](https://akinaru72.github.io/goit-js-hw-11/)**
